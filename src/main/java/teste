@@ -1,0 +1,78 @@
+public class Categoria {
+    private String nome;
+    public Categoria(String nome) { this.nome = nome; }
+}
+
+public class Fabricante {
+    private String nome;
+    public Fabricante(String nome) { this.nome = nome; }
+}
+
+public class Produto {
+    private String nome;
+    private double valorUnitario;
+    private int estoque;
+    private Categoria categoria;   // Associação
+    private Fabricante fabricante; // Associação
+
+    public Produto(String nome, double valorUnitario, Categoria cat, Fabricante fab) {
+        this.nome = nome;
+        this.valorUnitario = valorUnitario;
+        this.categoria = cat;
+        this.fabricante = fab;
+        this.estoque = 0;
+    }
+
+    public double getValorUnitario() { return valorUnitario; }
+    public String getNome() { return nome; }
+}
+
+
+import java.util.Date;
+
+// 1. Classe Endereco (Normalização: usada por Cliente, Empresa, etc.)
+public class Endereco {
+    private String logradouro;
+    private int numero;
+    private String cidade;
+    private String uf;
+
+    public Endereco(String logradouro, int numero, String cidade, String uf) {
+        this.logradouro = logradouro;
+        this.numero = numero;
+        this.cidade = cidade;
+        this.uf = uf;
+    }
+    // Getters e Setters aqui...
+}
+
+// 2. Classe Abstrata Pessoa (Herança)
+// Abstrata porque não instanciamos uma "Pessoa" genérica, apenas Cliente ou Funcionário
+public abstract class Pessoa {
+    private String nome;
+    private String cpf;
+    private String telefone;
+    private Endereco endereco; // Associação
+
+    public Pessoa(String nome, String cpf, Endereco endereco) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.endereco = endereco;
+    }
+
+    public String getNome() { return nome; }
+}
+
+// 3. Classe Empresa
+public class Empresa {
+    private String razaoSocial;
+    private String cnpj;
+    private Endereco endereco;
+
+    public Empresa(String razaoSocial, String cnpj, Endereco endereco) {
+        this.razaoSocial = razaoSocial;
+        this.cnpj = cnpj;
+        this.endereco = endereco;
+    }
+}
+

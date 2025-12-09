@@ -1,0 +1,113 @@
+@startuml
+class Endereco {
+    - logradouro : String
+    - numero : int
+    - bairro : String
+    - cep : String
+    - cidade : String
+    - uf : String
+}
+
+abstract class Pessoa {
+    - nome : String
+    - cpf : String
+    - telefone : String
+    - email : String
+}
+
+class Empresa {
+    - razaoSocial : String
+    - nomeFantasia : String
+    - cnpj : String
+}
+
+
+
+class Cliente {
+    - dataNascimento : Date
+    - pets : String
+}
+class Pet {
+    - nome : Sting
+    - raca : String
+    - especie : String
+    - dataNascimento : Date
+}
+
+class Funcionario {
+    - matricula : String
+}
+
+class Vendedor {
+    + registrarPedido(p: Pedido)
+}
+
+class Supervisor {
+    + aprovarPedido(p: Pedido)
+}
+
+' --- Produtos ---
+
+class Categoria {
+    - nome : String
+    - descricao : String
+}
+
+class Fabricante {
+    - nome : String
+    - contato : String
+}
+
+class Produto {
+    - nome : String
+    - descricao : String
+    - valorUnitario : Double
+    - estoque : int
+    - subcategoria : String
+}
+
+
+class TipoPagamento {
+    - descricao : String
+}
+
+class Pedido {
+    - data : DateTime
+    - valorTotal : Double
+    - status : String
+}
+
+class ItemPedido {
+    - quantidade : int
+    - valorUnitario : Double
+}
+
+
+' Herança
+Pessoa <|-- Cliente
+Pessoa <|-- Funcionario
+Funcionario <|-- Vendedor
+Funcionario <|-- Supervisor
+
+' Associações de Endereço
+Pessoa "1" --> "1" Endereco : possui
+Cliente "1" --> "*" Pet : Possui
+Empresa "1" --> "1" Endereco : localiza-se
+
+' Associações de Produto
+Produto --> "1" Categoria : pertence a
+Produto --> "1" Fabricante : fabricado por
+
+' Fluxo do Pedido
+Pedido --> "1" Cliente : solicita
+Pedido --> "1" Vendedor : registra
+Pedido --> "0..1" Supervisor : validação
+Pedido --> "1" Empresa : realizado em
+Pedido --> "1" TipoPagamento : forma pagto
+
+' Itens do Pedido
+ItemPedido --> "1" Produto : item referente a
+
+' Composição (Losango preenchido: Item não existe sem Pedido)
+Pedido "1" *-- "1..*" ItemPedido : composto por
+@enduml
