@@ -1,5 +1,4 @@
 @startuml
-' Configurações de estilo para ficar profissional
 skinparam classAttributeIconSize 0
 skinparam linetype ortho
 skinparam class {
@@ -8,7 +7,7 @@ skinparam class {
     BorderColor Black
 }
 
-title Diagrama de Classes - Sistema Acadêmico (Modelo SOL)
+title Diagrama de Classes - Sistema Petshop (Modelo SOL)
 
 ' --- Superclasse Abstrata ---
 abstract class Pessoa {
@@ -84,7 +83,7 @@ class Matricula {
 }
 
 ' --- Controller / Banco em Memória ---
-class SistemaAcademico {
+class SistemaPetshop {
     - List<Aluno> alunos
     - List<Professor> professores
     - List<Curso> cursos
@@ -114,7 +113,7 @@ Aluno "1" <-- "0..*" Matricula : Referencia
 Turma "1" *-- "0..*" Matricula : Contém (Composição) >
 
 ' O Sistema gerencia tudo
-SistemaAcademico o-- Aluno
-SistemaAcademico o-- Turma
-SistemaAcademico o-- Curso
+SistemaPetshop o-- Aluno
+SistemaPetshop o-- Turma
+SistemaPetshop o-- Curso
 @enduml
